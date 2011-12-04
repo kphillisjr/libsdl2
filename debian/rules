@@ -1,0 +1,145 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+MAKE=make
+
+# Support multiple makes at once based on number of processors
+ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+NJOBS := $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+else
+NJOBS := 1
+endif
+
+export SHLIBVER=1.3.0~20111204-1
+
+DEB_HOST_ARCH		?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+DEB_HOST_ARCH_OS	?= $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
+DEB_HOST_ARCH_CPU	?= $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU)
+DEB_HOST_GNU_TYPE	?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE	?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+export DEB_HOST_GNU_TYPE
+export DEB_BUILD_GNU_TYPE
+
+confflags = --prefix=/usr
+confflags += --disable-rpath --enable-sdl-dlopen --disable-loadso \
+	     --disable-video-ggi --disable-video-svga --disable-video-aalib \
+	     --disable-nas --disable-esd --disable-arts \
+	     --disable-alsa-shared --disable-pulseaudio-shared \
+	     --disable-x11-shared \
+	     --enable-video-directfb
+all_confflags = --enable-video-caca
+udeb_confflags = --enable-video-directfb \
+		 --disable-video-x11 \
+		 --disable-dga --disable-video-photon \
+		 --disable-video-fbcon --disable-video-ps2gs \
+		 --disable-video-opengl --disable-video-xbios \
+		 --disable-video-gem --disable-video-caca \
+		 --disable-audio \
+		 --disable-oss --disable-alsa --disable-pulseaudio
+
+ifeq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
+  confflags += --build $(DEB_HOST_GNU_TYPE)
+else
+  confflags += --build $(DEB_BUILD_GNU_TYPE) --host $(DEB_HOST_GNU_TYPE)
+endif
+
+# Support for DEB_BUILD_OPTIONS
+ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
+  confflags += --enable-debug
+else
+  confflags += --disable-debug
+endif
+
+# Only use NASM routines on x86 CPUs
+ifeq ($(DEB_HOST_ARCH_CPU),i386)
+  confflags += --enable-nasm
+endif
+
+# Don't use PlayStation 3 Cell driver on powerpc
+ifeq ($(DEB_HOST_ARCH_CPU),powerpc)
+  confflags += --enable-video-ps3=no \
+	       --disable-altivec
+endif
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	QUILT_PATCHES=debian/patches quilt push -a || test $$? = 2
+	touch configure # Fix timestamp
+	for dir in all udeb; do \
+	    if ( [ "$$dir" = "all" ] ); then \
+	        SWITCHES="$(all_confflags)"; \
+	    elif ( [ "$$dir" = "udeb" ] ); then \
+	        SWITCHES="$(udeb_confflags)"; \
+	    else \
+	        SWITCHES=""; \
+	    fi; \
+	    mkdir -p builddir/$$dir; \
+	    (cd builddir/$$dir; ../../configure $(confflags) $$SWITCHES); \
+	done
+	touch configure-stamp
+
+build: build-stamp
+build-arch: build
+build-indep: build
+build-stamp: configure-stamp
+	dh_testdir
+	for dir in all udeb; do \
+	    $(MAKE) -j $(NJOBS) -C builddir/$$dir || exit 1; \
+	done
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -Rf builddir
+	QUILT_PATCHES=debian/patches quilt pop -a -R || test $$? = 2
+	rm -rf .pc
+	rm -f build-stamp configure-stamp
+	dh_clean
+
+install:
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+	$(MAKE) -C builddir/all install DESTDIR=`pwd`/debian/tmp
+
+# Build architecture-independent files here.
+binary-indep: build install
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installdocs -A BUGS CREDITS README README-SDL.txt
+	dh_installexamples -plibsdl-1.3-dev test
+	rm debian/libsdl-1.3-dev/usr/share/doc/libsdl-1.3-dev/examples/test/COPYING
+	cd debian/libsdl-1.3-dev/usr/share/doc/libsdl-1.3-dev/examples; \
+	  tar cf examples.tar test; \
+	  rm -rf test
+	#mkdir -p debian/libsdl-1.3-dev/usr/share/man/man3
+	#cd debian/libsdl-1.3-dev/usr/share/doc/libsdl-1.3-dev/docs; \
+	#  mv man3/* ../../../man/man3/; rmdir man3
+	dh_installman -plibsdl-1.3-dev debian/sdl-config.1
+	dh_installchangelogs
+	dh_install --sourcedir=debian/tmp
+	sed -i -e "s/^dependency_libs=.*/dependency_libs=''/" debian/libsdl-1.3-dev/usr/lib/libSDL.la
+	dh_install --sourcedir=builddir/udeb/ -plibsdl-1.3-0-udeb build/.libs/*.so.* usr/lib/;
+	rm -rf debian/libsdl-1.3-0/usr/include
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_makeshlibs -V"libsdl-1.3-0 (>= $(SHLIBVER))" --add-udeb=libsdl-1.3-0-udeb
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary
