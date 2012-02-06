@@ -1,0 +1,2 @@
+#define SDL_REVISION "hg-6034:e228e94fef7f"
+#define SDL_REVISION_NUMBER 6034
