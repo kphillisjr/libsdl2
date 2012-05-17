@@ -1,4 +1,4 @@
-libsdl2 (2.0~20120220-1) UNRELEASED; urgency=low
+libsdl2 (2.0~20120220c-1) UNRELEASED; urgency=low
 
   * Upstream version was renamed to 2.0 (Closes: #669367).
   * New upstream snapshot (Closes: #671506).
