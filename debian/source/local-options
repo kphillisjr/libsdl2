@@ -1,0 +1,3 @@
+unapply-patches
+abort-on-upstream-changes
+extend-diff-ignore = "debian/gbp.conf$"
