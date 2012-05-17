@@ -3,10 +3,10 @@
  sdl2.pc.in     |    2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
-Index: SDL-1.2.14/sdl2.pc.in
+Index: libsdl2/sdl2.pc.in
 ===================================================================
---- SDL-1.2.14.orig/sdl2.pc.in	2009-10-12 19:07:20.000000000 -0400
-+++ SDL-1.2.14/sdl2.pc.in	2009-11-28 09:21:57.000000000 -0500
+--- libsdl2.orig/sdl2.pc.in	2012-05-18 00:51:07.802411954 +0200
++++ libsdl2/sdl2.pc.in	2012-05-18 00:51:26.270961566 +0200
 @@ -10,6 +10,6 @@
  Version: @SDL_VERSION@
  Requires:
@@ -14,13 +14,13 @@ Index: SDL-1.2.14/sdl2.pc.in
 -Libs: -L${libdir} @SDL_RLD_FLAGS@ @SDL_LIBS@
 +Libs: -L${libdir} @SDL_RLD_FLAGS@ -lSDL2
  Libs.private: @SDL_STATIC_LIBS@
- Cflags: -I${includedir}/SDL @SDL_CFLAGS@
-Index: SDL-1.2.14/sdl2-config.in
+ Cflags: -I${includedir}/SDL2 @SDL_CFLAGS@
+Index: libsdl2/sdl2-config.in
 ===================================================================
---- SDL-1.2.14.orig/sdl2-config.in	2009-10-12 19:07:20.000000000 -0400
-+++ SDL-1.2.14/sdl2-config.in	2009-11-28 09:21:04.000000000 -0500
+--- libsdl2.orig/sdl2-config.in	2012-05-18 00:51:07.802411954 +0200
++++ libsdl2/sdl2-config.in	2012-05-18 00:51:26.270961566 +0200
 @@ -45,7 +45,7 @@
-       echo -I@includedir@/SDL @SDL_CFLAGS@
+       echo -I@includedir@/SDL2 @SDL_CFLAGS@
        ;;
  @ENABLE_SHARED_TRUE@    --libs)
 -@ENABLE_SHARED_TRUE@      echo -L@libdir@ @SDL_RLD_FLAGS@ @SDL_LIBS@

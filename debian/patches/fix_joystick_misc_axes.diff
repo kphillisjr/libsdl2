@@ -1,8 +1,8 @@
-diff --git a/SDL/src/joystick/linux/SDL_sysjoystick.c b/SDL/src/joystick/linux/SDL_sysjoystick.c
-index 1017f22..47e7987 100755
---- a/SDL/src/joystick/linux/SDL_sysjoystick.c
-+++ b/SDL/src/joystick/linux/SDL_sysjoystick.c
-@@ -703,7 +703,7 @@ EV_ConfigJoystick(SDL_Joystick * joystick, int fd)
+Index: libsdl2/SDL/src/joystick/linux/SDL_sysjoystick.c
+===================================================================
+--- libsdl2.orig/SDL/src/joystick/linux/SDL_sysjoystick.c	2012-05-18 00:51:07.758390396 +0200
++++ libsdl2/SDL/src/joystick/linux/SDL_sysjoystick.c	2012-05-18 00:51:13.084998927 +0200
+@@ -703,7 +703,7 @@
                  ++joystick->nbuttons;
              }
          }

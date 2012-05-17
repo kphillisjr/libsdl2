@@ -6,6 +6,8 @@ libsdl2 (2.0~20120220c-1) UNRELEASED; urgency=low
 
   * debian/patches/fix_joystick_misc_axes.diff: fix a joystick remapping
     bug causing some axes to malfunction.
+  * debian/patches/external_header_paths.diff: provide additional CFLAGS
+    so that headers such as SDL_syswm.h can be included (Closes: #669363).
 
  -- Sam Hocevar <sho@debian.org>  Thu, 17 May 2012 19:03:59 +0200
 
