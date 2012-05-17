@@ -12,3 +12,4 @@
 300_dont_propagate_lpthread.diff
 ####310_fixmouseclicks
 ####320_disappearingcursor.diff
+fix_joystick_misc_axes.diff

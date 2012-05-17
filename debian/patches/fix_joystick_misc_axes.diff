@@ -1,0 +1,13 @@
+diff --git a/SDL/src/joystick/linux/SDL_sysjoystick.c b/SDL/src/joystick/linux/SDL_sysjoystick.c
+index 1017f22..47e7987 100755
+--- a/SDL/src/joystick/linux/SDL_sysjoystick.c
++++ b/SDL/src/joystick/linux/SDL_sysjoystick.c
+@@ -703,7 +703,7 @@ EV_ConfigJoystick(SDL_Joystick * joystick, int fd)
+                 ++joystick->nbuttons;
+             }
+         }
+-        for (i = 0; i < ABS_MISC; ++i) {
++        for (i = 0; i < ABS_MAX; ++i) {
+             /* Skip hats */
+             if (i == ABS_HAT0X) {
+                 i = ABS_HAT3Y;
