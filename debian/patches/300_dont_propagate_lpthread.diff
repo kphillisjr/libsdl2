@@ -1,12 +1,12 @@
 ---
- sdl-config.in |    2 +-
- sdl.pc.in     |    2 +-
+ sdl2-config.in |    2 +-
+ sdl2.pc.in     |    2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
-Index: SDL-1.2.14/sdl.pc.in
+Index: SDL-1.2.14/sdl2.pc.in
 ===================================================================
---- SDL-1.2.14.orig/sdl.pc.in	2009-10-12 19:07:20.000000000 -0400
-+++ SDL-1.2.14/sdl.pc.in	2009-11-28 09:21:57.000000000 -0500
+--- SDL-1.2.14.orig/sdl2.pc.in	2009-10-12 19:07:20.000000000 -0400
++++ SDL-1.2.14/sdl2.pc.in	2009-11-28 09:21:57.000000000 -0500
 @@ -10,6 +10,6 @@
  Version: @SDL_VERSION@
  Requires:
@@ -15,10 +15,10 @@ Index: SDL-1.2.14/sdl.pc.in
 +Libs: -L${libdir} @SDL_RLD_FLAGS@ -lSDL
  Libs.private: @SDL_STATIC_LIBS@
  Cflags: -I${includedir}/SDL @SDL_CFLAGS@
-Index: SDL-1.2.14/sdl-config.in
+Index: SDL-1.2.14/sdl2-config.in
 ===================================================================
---- SDL-1.2.14.orig/sdl-config.in	2009-10-12 19:07:20.000000000 -0400
-+++ SDL-1.2.14/sdl-config.in	2009-11-28 09:21:04.000000000 -0500
+--- SDL-1.2.14.orig/sdl2-config.in	2009-10-12 19:07:20.000000000 -0400
++++ SDL-1.2.14/sdl2-config.in	2009-11-28 09:21:04.000000000 -0500
 @@ -45,7 +45,7 @@
        echo -I@includedir@/SDL @SDL_CFLAGS@
        ;;

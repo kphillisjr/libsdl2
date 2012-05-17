@@ -1,4 +1,4 @@
-Source: libsdl-1.3
+Source: libsdl-2.0
 Priority: optional
 Section: libs
 Maintainer: Debian SDL packages maintainers <pkg-sdl-maintainers@lists.alioth.debian.org>
@@ -19,13 +19,15 @@ Build-Depends: dpkg (>= 1.13.2),
                libdirectfb-dev (>= 1.0) [!hurd-i386],
                libusbhid-dev [kfreebsd-any],
                libglu1-mesa-dev
-Vcs-Svn: svn://svn.debian.org/pkg-sdl/unstable/libsdl-1.3
-Vcs-Browser: http://svn.debian.org/wsvn/pkg-sdl/unstable/libsdl-1.3/
+Vcs-Git: git://anonscm.debian.org/pkg-sdl/packages/libsdl-2.0.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-sdl/packages/libsdl-2.0.git
 Homepage: http://www.libsdl.org/
 
-Package: libsdl-1.3-0
+Package: libsdl-2.0-0
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
+Conflicts: libsdl-1.3-0
+Replaces: libsdl-1.3-0
 Description: Simple DirectMedia Layer
  SDL is a library that allows programs portable low level access to
  a video framebuffer, audio output, mouse, and keyboard.
@@ -33,7 +35,7 @@ Description: Simple DirectMedia Layer
  This version of SDL is compiled with X11, caca and DirectFB graphics
  drivers and OSS, ALSA, NAS and PulseAudio sound drivers.
 
-Package: libsdl-1.3-0-udeb
+Package: libsdl-2.0-0-udeb
 XC-Package-Type: udeb
 Architecture: any
 Section: debian-installer
@@ -45,11 +47,11 @@ Description: Simple DirectMedia Layer (with directfb graphics and no sound)
  .
  This version of SDL is compiled with directfb graphics and no sound.
 
-Package: libsdl-1.3-dev
+Package: libsdl-2.0-dev
 Architecture: any
 Section: libdevel
 Depends: ${misc:Depends},
-         libsdl-1.3-0 (= ${binary:Version}),
+         libsdl-2.0-0 (= ${binary:Version}),
          libx11-dev,
          libglu1-mesa-dev,
          libasound2-dev [linux-any],
@@ -59,8 +61,8 @@ Depends: ${misc:Depends},
          libusbhid-dev [kfreebsd-any],
          libxt-dev,
          libxext-dev
-Replaces: libsdl-dev, libsdl0.11-dev, libsdl1.0-dev, libsdl1.1-dev
-Conflicts: xlibs-pic (<< 4.1.0-10), libsdl-dev, libsdl0.11-dev, libsdl0.11, libsdl1.0-dev, libsdl1.1-dev, libsdl1.2-dev
+Conflicts: libsdl-1.3-dev
+Replaces: libsdl-1.3-dev
 Provides: libsdl-dev
 Description: Simple DirectMedia Layer development files
  SDL is a library that allows programs portable low level access to a video

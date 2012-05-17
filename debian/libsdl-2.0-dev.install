@@ -1,7 +1,7 @@
-usr/include/SDL
+usr/include/SDL2
 usr/lib/*.a
 usr/lib/*.so
 usr/lib/*.la
 usr/lib/pkgconfig
-usr/bin/sdl-config
+usr/bin/sdl2-config
 usr/share/aclocal/*

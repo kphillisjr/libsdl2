@@ -1,3 +1,11 @@
+libsdl-2.0 (2.0.0~20120220b-1) UNRELEASED; urgency=low
+
+  * Upstream version was renamed to 2.0 (Closes: #669367).
+  * New upstream snapshot (Closes: #671506).
+  * This package no longer conflicts with libsdl-1.2.
+
+ -- Sam Hocevar <sho@debian.org>  Thu, 17 May 2012 19:03:59 +0200
+
 libsdl-1.3 (1.3.0~20111204-1) experimental; urgency=low
 
   * Initial upload from upstream snapshot.
