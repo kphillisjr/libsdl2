@@ -1,8 +1,9 @@
-libsdl2 (2.0~20120220c-1) UNRELEASED; urgency=low
+libsdl2 (2.0~20120220c-1) experimental; urgency=low
 
   * Upstream version was renamed to 2.0 (Closes: #669367).
   * New upstream snapshot (Closes: #671506).
   * This package no longer conflicts with libsdl-1.2.
+  * debian/rules: add multiarch support (Closes: #669364).
 
   * debian/patches/fix_joystick_misc_axes.diff: fix a joystick remapping
     bug causing some axes to malfunction.
