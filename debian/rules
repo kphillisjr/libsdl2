@@ -12,7 +12,7 @@ else
 NJOBS := 1
 endif
 
-export SHLIBVER=2.0~20120220-1
+export SHLIBVER=2.0~20120220b-1
 
 DEB_HOST_ARCH		?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
 DEB_HOST_ARCH_OS	?= $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
@@ -117,24 +117,24 @@ binary-arch: build install
 	dh_testdir
 	dh_testroot
 	dh_installdocs -A BUGS CREDITS README README-SDL.txt
-	dh_installexamples -plibsdl-2.0-dev test
-	rm debian/libsdl-2.0-dev/usr/share/doc/libsdl-2.0-dev/examples/test/COPYING
-	cd debian/libsdl-2.0-dev/usr/share/doc/libsdl-2.0-dev/examples; \
+	dh_installexamples -plibsdl2-dev test
+	rm debian/libsdl2-dev/usr/share/doc/libsdl2-dev/examples/test/COPYING
+	cd debian/libsdl2-dev/usr/share/doc/libsdl2-dev/examples; \
 	  tar cf examples.tar test; \
 	  rm -rf test
-	#mkdir -p debian/libsdl-2.0-dev/usr/share/man/man3
-	#cd debian/libsdl-2.0-dev/usr/share/doc/libsdl-2.0-dev/docs; \
+	#mkdir -p debian/libsdl2-dev/usr/share/man/man3
+	#cd debian/libsdl2-dev/usr/share/doc/libsdl2-dev/docs; \
 	#  mv man3/* ../../../man/man3/; rmdir man3
-	dh_installman -plibsdl-2.0-dev debian/sdl2-config.1
+	dh_installman -plibsdl2-dev debian/sdl2-config.1
 	dh_installchangelogs
 	dh_install --sourcedir=debian/tmp
-	sed -i -e "s/^dependency_libs=.*/dependency_libs=''/" debian/libsdl-2.0-dev/usr/lib/libSDL2.la
-	dh_install --sourcedir=builddir/udeb/ -plibsdl-2.0-0-udeb build/.libs/*.so.* usr/lib/;
-	rm -rf debian/libsdl-2.0-0/usr/include
+	sed -i -e "s/^dependency_libs=.*/dependency_libs=''/" debian/libsdl2-dev/usr/lib/libSDL2.la
+	dh_install --sourcedir=builddir/udeb/ -plibsdl2-2.0-0-udeb build/.libs/*.so.* usr/lib/;
+	rm -rf debian/libsdl2-2.0-0/usr/include
 	dh_strip
 	dh_compress
 	dh_fixperms
-	dh_makeshlibs -V"libsdl-2.0-0 (>= $(SHLIBVER))" --add-udeb=libsdl-2.0-0-udeb
+	dh_makeshlibs -V"libsdl2-2.0-0 (>= $(SHLIBVER))" --add-udeb=libsdl2-2.0-0-udeb
 	dh_installdeb
 	dh_shlibdeps
 	dh_gencontrol

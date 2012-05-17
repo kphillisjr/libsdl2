@@ -1,9 +1,9 @@
-Source: libsdl-2.0
+Source: libsdl2
 Priority: optional
 Section: libs
 Maintainer: Debian SDL packages maintainers <pkg-sdl-maintainers@lists.alioth.debian.org>
 Uploaders: Barry deFreese <bdefreese@debian.org>, Sam Hocevar <sho@debian.org>
-Standards-Version: 3.9.2
+Standards-Version: 3.9.3
 Build-Depends: dpkg (>= 1.13.2),
                debhelper (>= 5.0),
                quilt,
@@ -19,11 +19,11 @@ Build-Depends: dpkg (>= 1.13.2),
                libdirectfb-dev (>= 1.0) [!hurd-i386],
                libusbhid-dev [kfreebsd-any],
                libglu1-mesa-dev
-Vcs-Git: git://anonscm.debian.org/pkg-sdl/packages/libsdl-2.0.git
-Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-sdl/packages/libsdl-2.0.git
+Vcs-Git: git://anonscm.debian.org/pkg-sdl/packages/libsdl2.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-sdl/packages/libsdl2.git
 Homepage: http://www.libsdl.org/
 
-Package: libsdl-2.0-0
+Package: libsdl2-2.0-0
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Conflicts: libsdl-1.3-0
@@ -35,7 +35,7 @@ Description: Simple DirectMedia Layer
  This version of SDL is compiled with X11, caca and DirectFB graphics
  drivers and OSS, ALSA, NAS and PulseAudio sound drivers.
 
-Package: libsdl-2.0-0-udeb
+Package: libsdl2-2.0-0-udeb
 XC-Package-Type: udeb
 Architecture: any
 Section: debian-installer
@@ -47,11 +47,11 @@ Description: Simple DirectMedia Layer (with directfb graphics and no sound)
  .
  This version of SDL is compiled with directfb graphics and no sound.
 
-Package: libsdl-2.0-dev
+Package: libsdl2-dev
 Architecture: any
 Section: libdevel
 Depends: ${misc:Depends},
-         libsdl-2.0-0 (= ${binary:Version}),
+         libsdl2-2.0-0 (= ${binary:Version}),
          libx11-dev,
          libglu1-mesa-dev,
          libasound2-dev [linux-any],
@@ -63,7 +63,6 @@ Depends: ${misc:Depends},
          libxext-dev
 Conflicts: libsdl-1.3-dev
 Replaces: libsdl-1.3-dev
-Provides: libsdl-dev
 Description: Simple DirectMedia Layer development files
  SDL is a library that allows programs portable low level access to a video
  framebuffer, audio output, mouse, and keyboard.
