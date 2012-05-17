@@ -12,7 +12,7 @@ Index: SDL-1.2.14/sdl2.pc.in
  Requires:
  Conflicts:
 -Libs: -L${libdir} @SDL_RLD_FLAGS@ @SDL_LIBS@
-+Libs: -L${libdir} @SDL_RLD_FLAGS@ -lSDL
++Libs: -L${libdir} @SDL_RLD_FLAGS@ -lSDL2
  Libs.private: @SDL_STATIC_LIBS@
  Cflags: -I${includedir}/SDL @SDL_CFLAGS@
 Index: SDL-1.2.14/sdl2-config.in
@@ -24,7 +24,7 @@ Index: SDL-1.2.14/sdl2-config.in
        ;;
  @ENABLE_SHARED_TRUE@    --libs)
 -@ENABLE_SHARED_TRUE@      echo -L@libdir@ @SDL_RLD_FLAGS@ @SDL_LIBS@
-+@ENABLE_SHARED_TRUE@      echo -L@libdir@ @SDL_RLD_FLAGS@ -lSDL
++@ENABLE_SHARED_TRUE@      echo -L@libdir@ @SDL_RLD_FLAGS@ -lSDL2
  @ENABLE_SHARED_TRUE@      ;;
  @ENABLE_STATIC_TRUE@@ENABLE_SHARED_TRUE@    --static-libs)
  @ENABLE_STATIC_TRUE@@ENABLE_SHARED_FALSE@    --libs|--static-libs)
