@@ -16,7 +16,7 @@ Build-Depends: dpkg (>= 1.13.2),
                libgl1-mesa-dev,
                libasound2-dev [linux-any],
                libcaca-dev,
-               libdirectfb-dev (>= 1.0) [!hurd-i386],
+               libdirectfb-dev (>= 1.2) [!hurd-i386],
                libusbhid-dev [kfreebsd-any],
                libglu1-mesa-dev
 Vcs-Git: git://anonscm.debian.org/pkg-sdl/packages/libsdl2.git
